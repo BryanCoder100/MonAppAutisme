@@ -1,0 +1,15 @@
+#:kivy 2.1.0
+
+<PuzzleScreen>:
+    name: 'puzzle'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "🧩 Module Puzzle"
+            font_size: '28sp'
+        Button:
+            text: "← Retour"
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.root.current = 'home'
+        # Ici tu intégreras ta grille de pièces

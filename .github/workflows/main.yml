@@ -1,0 +1,42 @@
+name: CI
+
+# Déclenche le workflow à chaque push sur main ou sur une branche feature/*
+# et à chaque Pull Request vers main
+on:
+  push:
+    branches:
+      - main
+      - 'feature/*'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+
+    # matrix pour tester plusieurs versions de Python si tu veux
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10]
+
+    steps:
+      # 1) Récupère le code
+      - uses: actions/checkout@v3
+
+      # 2) Installe la bonne version de Python
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # 3) Installe tes dépendances
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 4) Lance les tests
+      - name: Run tests
+        run: pytest --maxfail=1 --disable-warnings -q

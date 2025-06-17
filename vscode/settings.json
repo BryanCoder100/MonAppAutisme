@@ -1,0 +1,15 @@
+{
+  // pointe bien vers ton venv
+  "python.pythonPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+
+  // pour que Pylance indexe ton code source Kivy
+  "python.analysis.extraPaths": [
+    "src",           // si tes modules sont dans src/app/...
+    "src/app"        // parfois utile si tu importes comme `from app.ui...`
+  ],
+
+  // (optionnel) active lint et autocomplétion
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false
+}
